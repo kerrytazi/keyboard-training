@@ -2,6 +2,12 @@
 
 
 
+
+const REGEX_SENTENSE = /[^\s].+?[.!?\s]+(?=\s)/g;
+const REGEX_ENDLINE = /\s*\n\s+/g;
+const REGEX_INVISIBLE_CHARS = /[\t\n\s]+/g;
+const REGEX_QUOTES = /«|»/g;
+
 const STATS = {
     time: 0,
     speed: 0,
@@ -29,7 +35,8 @@ window.app = new Vue({
             timer: {
                 enabled: false,
                 time: 60,
-                func: 0
+                func: 0,
+                alert: false
             },
 
             randomText: true,
@@ -100,7 +107,7 @@ window.app = new Vue({
             
             let { timer } = this.settings;
             if (timer.enabled) {
-                timer.func = setTimeout(this.stop, timer.time * 1000);
+                timer.func = setTimeout(this.timerAlert, timer.time * 1000);
             }
         },
 
@@ -127,11 +134,12 @@ window.app = new Vue({
         },
 
         stop() {
-            if (!this.stage) return;
-            clearInterval(this.updateInterval);
-            clearTimeout(this.settings.timer.func);
-            this.stage = 2;
-            this.updateStats();
+            if (this.stage === 1) {
+                clearInterval(this.updateInterval);
+                clearTimeout(this.settings.timer.func);
+                this.stage = 2;
+                this.updateStats();
+            }
         },
 
         reset() {
@@ -144,12 +152,18 @@ window.app = new Vue({
             Object.assign(this.stats, STATS);
         },
 
+        timerAlert() {
+            this.stop();
+            this.settings.timer.alert = true;
+            setTimeout(() => { this.settings.timer.alert = false; }, 1000);
+        },
+
         randomize(text) {
             return text
-                .match(/[^\s].+?[.!?\s]+(?=\s)/g)
+                .match(REGEX_SENTENSE)
                 .sort(() => Math.random() - .5)
                 .join(' ')
-                .replace(/\n\s+/g, '\n');
+                .replace(REGEX_ENDLINE, '\n');
         },
 
         async newText() {
@@ -186,9 +200,9 @@ window.app = new Vue({
         textSource(t) {
             this.reset();
             this.text = t
-                .replace(/\t+|\n+|\s{2,}/g, ' ')
-                .replace(/«|»/g, '"')
-                .replace(/—/g, '-');
+                .replace(REGEX_INVISIBLE_CHARS, ' ')
+                .replace(REGEX_QUOTES, '"')
+                .replace('—', '-');
         },
 
         'settings.locale.faceLang': function(val) {
@@ -199,10 +213,18 @@ window.app = new Vue({
         'settings.locale.textsLang': function(val) {
             localStorage.texts = val;
             this.newText();
+        },
+
+        'settings.randomText': function(val) {
+            if (val) this.textSource = this.randomize(this.textSource);
         }
     },
 
     mounted() {
+        this.$watch('settings.stamina', this.reset);
+        this.$watch('settings.timer.enabled', this.reset);
+        this.$watch('settings.randomText', this.reset);
+
         this.newLocale();
         this.newText();
         window.addEventListener('keydown', this.onKeyDown);

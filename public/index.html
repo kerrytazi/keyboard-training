@@ -9,125 +9,128 @@
 </head>
 <body>
     <div id="vue_container" class="full_screen">
-        <div class="textrow">
-            <span
-                class="text_pass"
-                v-text="pass"></span>
-            <span
-                class="text_error"
-                v-text="error"></span>
-            <span
-                class="text_require"
-                v-text="text.substr(pos, distance)"></span>
-        </div>
-        <div class="stats">
-            <div>
+        <div class="side_top">
+            <div class="textrow cont_block">
                 <span
-                    class="stat_0"
-                    v-text="(stage > 0) ? stats.time + localeFace.s : localeFace.time"></span>
+                    class="text_pass"
+                    v-text="pass"></span>
                 <span
-                    class="stat_1"
-                    v-text="(stage > 0) ? stats.speed + localeFace.cpm : localeFace.speed"></span>
+                    class="text_error"
+                    v-text="error"></span>
                 <span
-                    class="stat_2"
-                    v-text="(stage > 0) ? stats.av + localeFace.cpm : localeFace.av"></span>
-            </div>
-            <div>
-                <span
-                    class="stat_3"
-                    v-text="(stage > 0) ? stats.acc + localeFace.per : localeFace.acc"></span>
-                <span
-                    class="stat_4"
-                    v-text="(stage > 0) ? stats.max + localeFace.cpm : localeFace.max"></span>
-                <span
-                    class="stat_5"
-                    v-text="(stage > 0) ? stats.total + localeFace.taps : localeFace.total"></span>
+                    class="text_require"
+                    v-text="text.substr(pos, distance)"></span>
             </div>
         </div>
-        <div
-            id="reset_btn"
-            v-text="localeFace.reset"
-            @click="reset()"></div>
-        <div
-            id="settings_btn"
-            v-text="localeFace.settings"
-            @click="settingsMode = true, stop()"></div>
-        <div
-            id="new_text_btn"
-            v-text="localeFace.newText"
-            @click="newText()"></div>
-        <textarea
-            class="text_inp"
-            @focus="editMode = true"
-            @blur="editMode = false"
-            v-model="textSource"></textarea>
-        <div
-            class="settings_background full_screen"
-            not-attr
-            v-if="settingsMode"
-            @click="settingsMode = false, reset()"></div>
-        <div
-            class="settings_panel"
-            v-if="settingsMode"
-        >
-            <div>
-                <label
-                    for="sett_stamina"
-                    v-text="localeFace.stamina"></label>
-                <input
-                    id="sett_stamina"
-                    type="checkbox"
-                    v-model="settings.stamina">
-            </div>
-            <div>
-                <label
-                    for="sett_timer"
-                    v-text="localeFace.timer"></label>
-                <input
-                    id="sett_timer"
-                    type="checkbox"
-                    v-model="settings.timer.enabled">
-                <input
-                    type="number"
-                    min="1"
-                    :disabled="!settings.timer.enabled"
-                    v-model="settings.timer.time">
-            </div>
-            <div>
-                <label
-                    for="sett_rand"
-                    v-text="localeFace.random"></label>
-                <input
-                    id="sett_rand"
-                    type="checkbox"
-                    v-model="settings.randomText">
-            </div>
-            <div>
-                <label v-text="localeFace.texts"></label>
-                <span v-for="loc in settings.locale.list">
-                    <input
-                        type="radio"
-                        :id="`sett_loc_texts_${loc}`"
-                        :value="loc"
-                        v-model="settings.locale.textsLang">
+        <div class="side_left">
+            <div
+                id="reset_btn"
+                class="cont_block"
+                v-text="localeFace.reset"
+                @click="reset()"></div>
+            <div
+                id="new_text_btn"
+                class="cont_block"
+                v-text="localeFace.newText"
+                @click="newText()"></div>
+            <div
+                id="settings_panel"
+                class="cont_block"
+            >
+                <div>
                     <label
-                        :for="`sett_loc_texts_${loc}`"
-                        v-text="loc"></label>
-                </span>
-            </div>
-            <div>
-                <label v-text="localeFace.interface"></label>
-                <span v-for="loc in settings.locale.list">
+                        for="sett_stamina"
+                        v-text="localeFace.stamina"></label>
                     <input
-                        type="radio"
-                        :id="`sett_loc_face_${loc}`"
-                        :value="loc"
-                        v-model="settings.locale.faceLang">
+                        id="sett_stamina"
+                        type="checkbox"
+                        v-model="settings.stamina">
+                </div>
+                <div>
                     <label
-                        :for="`sett_loc_face_${loc}`"
-                        v-text="loc"></label>
-                </span>
+                        for="sett_timer"
+                        v-text="localeFace.timer"></label>
+                    <input
+                        id="sett_timer"
+                        type="checkbox"
+                        v-model="settings.timer.enabled">
+                </div>
+                <div>
+                    <input
+                        type="number"
+                        min="1"
+                        :disabled="!settings.timer.enabled"
+                        v-model="settings.timer.time"
+                        @focus="settingsMode = true, stop()"
+                        @blur="settingsMode = false, reset()">
+                </div>
+                <div>
+                    <label
+                        for="sett_rand"
+                        v-text="localeFace.random"></label>
+                    <input
+                        id="sett_rand"
+                        type="checkbox"
+                        v-model="settings.randomText">
+                </div>
+                <div>
+                    <label v-text="localeFace.texts"></label>
+                    <span v-for="loc in settings.locale.list">
+                        <input
+                            type="radio"
+                            :id="`sett_loc_texts_${loc}`"
+                            :value="loc"
+                            v-model="settings.locale.textsLang">
+                        <label
+                            :for="`sett_loc_texts_${loc}`"
+                            v-text="loc"></label>
+                    </span>
+                </div>
+                <div>
+                    <label v-text="localeFace.interface"></label>
+                    <span v-for="loc in settings.locale.list">
+                        <input
+                            type="radio"
+                            :id="`sett_loc_face_${loc}`"
+                            :value="loc"
+                            v-model="settings.locale.faceLang">
+                        <label
+                            :for="`sett_loc_face_${loc}`"
+                            v-text="loc"></label>
+                    </span>
+                </div>
             </div>
+        </div>
+        <div class="side_right">
+            <div class="stats cont_block">
+                <div>
+                    <span
+                        :class="settings.timer.alert ? 'stat_0_animate' : 'stat_0'"
+                        v-text="(stage > 0) ? stats.time + localeFace.s : localeFace.time"></span>
+                    <span
+                        class="stat_1"
+                        v-text="(stage > 0) ? stats.speed + localeFace.cpm : localeFace.speed"></span>
+                    <span
+                        class="stat_2"
+                        v-text="(stage > 0) ? stats.av + localeFace.cpm : localeFace.av"></span>
+                </div>
+                <div>
+                    <span
+                        class="stat_3"
+                        v-text="(stage > 0) ? stats.acc + localeFace.per : localeFace.acc"></span>
+                    <span
+                        class="stat_4"
+                        v-text="(stage > 0) ? stats.max + localeFace.cpm : localeFace.max"></span>
+                    <span
+                        class="stat_5"
+                        v-text="(stage > 0) ? stats.total + localeFace.taps : localeFace.total"></span>
+                </div>
+            </div>
+            <textarea
+                class="text_inp cont_block"
+                @focus="editMode = true"
+                @blur="editMode = false"
+                v-model="textSource"></textarea>
         </div>
     </div>
 </body>

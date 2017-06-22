@@ -34,7 +34,6 @@ func init() {
     FILES["/"] = filepath.Join(CURRENT, "public",  "index.html");
     FILES["/main.css"] = filepath.Join(CURRENT, "public", "main.css");
     FILES["/main.js"] = filepath.Join(CURRENT, "public", "main.js");
-    FILES["/vue.js"] = filepath.Join(CURRENT, "public", "vue.js");
     FILES["/vue.min.js"] = filepath.Join(CURRENT, "public", "vue.min.js");
 
     locales, _ := ioutil.ReadDir(filepath.Join(CURRENT, "texts"));

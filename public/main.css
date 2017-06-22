@@ -18,9 +18,9 @@ textarea {
     font-size: 0;
 }
 
-#vue_container > *:not([not-attr]) {
-    box-shadow: 0 0 1vh rgba(0, 0, 0, .8);
+.cont_block {
     position: relative;
+    box-shadow: 0 0 1vh rgba(0, 0, 0, .8);
 }
 
 .full_screen {
@@ -34,7 +34,7 @@ textarea {
 
 .textrow {
     display: flex;
-    top: 8vh;
+    top: 16vh;
     left: calc(50vw - 85vh);
     height: 10vh;
     width: 170vh;
@@ -51,6 +51,26 @@ textarea {
     white-space: pre;
 }
 
+.side_top {
+    position: relative;
+    height: 26vh;
+}
+
+.side_left {
+    width: calc(50vw - 50vh)
+}
+
+.side_right {
+    height: 54vh;
+    width: 135vh;
+}
+
+.side_left,
+.side_right {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
 
 .text_pass {
     background: #99EB99;
@@ -66,10 +86,10 @@ textarea {
 }
 
 .stats {
-    top: 11vh;
-    left: calc(50vw - 60vh);
+    top: 2vh;
+    left: 2vh;
     height: 20vh;
-    width: 120vh;
+    width: 133vh;
 }
 
 .stats > div {
@@ -84,13 +104,11 @@ textarea {
 }
 
 #reset_btn,
-#settings_btn,
 #new_text_btn {
-    display: inline-block;
-    top: 16vh;
-    left: calc(50vw - 47vh);
+    left: calc(50vw - 85vh);
+    margin-top: 2vh;
     height: 6vh;
-    width: 30vh;
+    width: 35vh;
     background: #EEEEEE;
     cursor: pointer;
 
@@ -100,16 +118,41 @@ textarea {
     text-align: center;
 }
 
-#reset_btn,
-#settings_btn {
-    margin-right: 2vh;
+#settings_panel {
+    left: calc(50vw - 85vh);
+    margin-top: 2vh;
+    height: 23vh;
+    width: 33vh;
+    padding: 1vh;
+    background: #EEEEEE;
+
+    font-size: 3vh;
+}
+
+#settings_panel > div {
+    height: 4vh;
+}
+
+#settings_panel input[type="checkbox"],
+#settings_panel input[type="radio"] {
+    height: 2.5vh;
+    width: 2.5vh;
+}
+
+#settings_panel input[type="number"] {
+    height: 2.5vh;
+    width: 20vh;
+    border: 0;
+    padding: 0;
+
+    font-size: 2.5vh;
 }
 
 .text_inp {
-    top: 20vh;
-    left: calc(50vw - 60vh);
+    top: 4vh;
+    left: 2vh;
     height: 30vh;
-    width: 120vh;
+    width: 133vh;
 
     font-size: 3vh;
 }
@@ -121,34 +164,11 @@ textarea {
 .stat_4 { background: hsl(270, 80%, 80%); }
 .stat_5 { background: hsl(330, 80%, 80%); }
 
-.settings_mode {
-    position: absolute;
+.stat_0_animate {
+    animation: key_animate_alert 1s forwards;
 }
 
-.settings_background {
-    position: absolute;
-    background: #000;
-    opacity: .7;
-}
-
-.settings_panel {
-    top: -30vh;
-    left: calc(50vw - 20vh);
-    height: 28vh;
-    width: 38vh;
-    padding: 1vh;
-    background: #EEEEEE;
-
-    font-size: 3vh;
-}
-
-.settings_panel > div > input[type="checkbox"] {
-    height: 2.5vh;
-    width: 2.5vh;
-}
-
-.settings_panel > div > input[type="number"] {
-    height: 2.5vh;
-    width: 20vh;
-    font-size: 2.5vh;
+@keyframes key_animate_alert {
+    from { background: #FF0000; }
+    to { background: hsl( 30, 80%, 80%); }
 }
