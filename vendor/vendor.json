@@ -1,5 +1,5 @@
 {
-    "rootPath": "github.com/heroku/go-getting-started",
+    "rootPath": "github.com/kerrytazi/Server",
     "heroku": {
         "install" : [ "./..." ],
         "goVersion": "go1.8"

@@ -1,1 +1,1 @@
-web: go-gettings-started
+web: Server
