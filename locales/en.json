@@ -1,0 +1,21 @@
+{
+    "locale": "en",
+    "time": "Time",
+    "speed": "Speed",
+    "av": "Average",
+    "acc": "Accuracy",
+    "max": "Max speed",
+    "total": "Total taps",
+    "s": " s",
+    "cpm": " cpm",
+    "per": " %",
+    "taps": " taps",
+    "reset": "Reset",
+    "settings": "Settings",
+    "newText": "New text",
+    "stamina": "Stamina mode",
+    "timer": "Timer",
+    "random": "Random texts",
+    "interface": "Language",
+    "texts": "Texts"
+}

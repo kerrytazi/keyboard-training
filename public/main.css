@@ -1,0 +1,154 @@
+body {
+    background: #4a4a4a;
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif, Georgia, Arial;
+    overflow: hidden;
+}
+
+textarea {
+    display: block;
+    resize: none;
+    padding: 0;
+    border: 0;
+}
+
+#vue_container {
+    position: relative;
+    font-size: 0;
+}
+
+#vue_container > *:not([not-attr]) {
+    box-shadow: 0 0 1vh rgba(0, 0, 0, .8);
+    position: relative;
+}
+
+.full_screen {
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.textrow {
+    display: flex;
+    top: 8vh;
+    left: calc(50vw - 85vh);
+    height: 10vh;
+    width: 170vh;
+    overflow: hidden;
+    background: #AD99EB;
+
+    font-size: 0;
+    line-height: 10vh;
+    font-family: Courier, monospace, 'Lucida Console';
+}
+
+.textrow > span {
+    font-size: 8.33vh;
+    white-space: pre;
+}
+
+
+.text_pass {
+    background: #99EB99;
+}
+
+.text_error {
+    background: #EB9999;
+}
+
+.text_require {
+    background: #AD99EB;
+    width: 85vh;
+}
+
+.stats {
+    top: 11vh;
+    left: calc(50vw - 60vh);
+    height: 20vh;
+    width: 120vh;
+}
+
+.stats > div {
+    display: flex;
+}
+
+.stats > div > span {
+    flex: 1;
+    line-height: 10vh;
+    font-size: 6vh;
+    text-align: center;
+}
+
+#reset_btn,
+#settings_btn,
+#new_text_btn {
+    display: inline-block;
+    top: 16vh;
+    left: calc(50vw - 47vh);
+    height: 6vh;
+    width: 30vh;
+    background: #EEEEEE;
+    cursor: pointer;
+
+    line-height: 6vh;
+    font-size: 4.5vh;
+    text-shadow: 0 0 1vh rgba(0, 0, 0, .3);
+    text-align: center;
+}
+
+#reset_btn,
+#settings_btn {
+    margin-right: 2vh;
+}
+
+.text_inp {
+    top: 20vh;
+    left: calc(50vw - 60vh);
+    height: 30vh;
+    width: 120vh;
+
+    font-size: 3vh;
+}
+
+.stat_0 { background: hsl( 30, 80%, 80%); }
+.stat_1 { background: hsl( 90, 80%, 80%); }
+.stat_2 { background: hsl(150, 80%, 80%); }
+.stat_3 { background: hsl(210, 80%, 80%); }
+.stat_4 { background: hsl(270, 80%, 80%); }
+.stat_5 { background: hsl(330, 80%, 80%); }
+
+.settings_mode {
+    position: absolute;
+}
+
+.settings_background {
+    position: absolute;
+    background: #000;
+    opacity: .7;
+}
+
+.settings_panel {
+    top: -30vh;
+    left: calc(50vw - 20vh);
+    height: 28vh;
+    width: 38vh;
+    padding: 1vh;
+    background: #EEEEEE;
+
+    font-size: 3vh;
+}
+
+.settings_panel > div > input[type="checkbox"] {
+    height: 2.5vh;
+    width: 2.5vh;
+}
+
+.settings_panel > div > input[type="number"] {
+    height: 2.5vh;
+    width: 20vh;
+    font-size: 2.5vh;
+}
