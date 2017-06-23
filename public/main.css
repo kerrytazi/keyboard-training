@@ -62,7 +62,7 @@ textarea {
 }
 
 .side_left {
-    width: calc(50vw - 50vh)
+    width: calc(50vw - 50vh);
 }
 
 .side_right {
@@ -195,4 +195,131 @@ textarea {
 @keyframes key_animate_alert {
     from { background: #FF0000; }
     to { background: hsl( 30, 80%, 80%); }
+}
+
+
+/**********************************
+    (width * 16) < (height * 9)
+**********************************/
+
+@media only screen and (max-width: 177.77777vh) {
+
+body {
+    background: #cccccc;
+}
+
+.cont_block {
+    box-shadow: 0 0 .5625vw rgba(0, 0, 0, .8);
+}
+
+.textrow {
+    top: calc(50vh - 19.1vw);
+    left: 2.1vw;
+    height: 5.5vw;
+    width: 95.8vw;
+    line-height: 5.5vw;
+}
+
+.textrow > span {
+    font-size: 4.7vw;
+}
+
+.side_top {
+    height: calc(50vh - 13.6vw);
+}
+
+.side_left {
+    width: 21.87777vw;
+}
+
+.side_right {
+    top: -30.375vw;
+    left: 21.87777vw;
+    height: 30.375vw;
+    width: 74.8125vw;
+}
+
+.text_require {
+    width: 48.3vw;
+}
+
+.stats {
+    top: 1.125vw;
+    left: 1.125vw;
+    height: 11.25vw;
+    width: 74.8125vw;
+}
+
+.stats > div > span {
+    line-height: 5.625vw;
+    font-size: 3.375vw;
+}
+
+#reset_btn,
+#new_text_btn {
+    left: 2.1vw;
+    margin-top: 1.125vw;
+    height: 3.39999vw;
+    width: 19.77777vw;
+
+    
+    text-shadow: 0 0 .5625vw rgba(0, 0, 0, .3);
+    line-height: 3.39999vw;
+    font-size: 2.5vw;
+}
+
+#settings_panel {
+    left: 2.1vw;
+    margin-top: 1.125vw;
+    height: 12.9375vw;
+    width: 18.65277vw;
+    padding: .5625vw;
+
+    font-size: 1.6875vw;
+}
+
+#settings_panel > div {
+    height: 2.25vw;
+}
+
+#links {
+    left: 2.1vw;
+    margin-top: 1.125vw;
+    height: 5.0625vw;
+    width: 19.77777vw;
+
+    font-size: 2.25vw;
+}
+
+#links a {
+    height: 2.25vw;
+    width: 7.3125vw;
+}
+
+#links a:hover {
+    text-shadow: 0 0 .225vw rgba(0, 0, 0, .8);
+}
+
+#settings_panel input[type="checkbox"],
+#settings_panel input[type="radio"] {
+    height: 1.40625vw;
+    width: 1.40625vw;
+}
+
+#settings_panel input[type="number"] {
+    height: 1.40625vw;
+    width: 11.25vw;
+
+    font-size: 1.40625vw;
+}
+
+.text_inp {
+    top: 2.25vw;
+    left: 1.125vw;
+    height: 16.875vw;
+    width: 74.8125vw;
+
+    font-size: 1.6875vw;
+}
+
 }
