@@ -204,10 +204,6 @@ textarea {
 
 @media only screen and (max-width: 177.77777vh) {
 
-body {
-    background: #cccccc;
-}
-
 .cont_block {
     box-shadow: 0 0 .5625vw rgba(0, 0, 0, .8);
 }
