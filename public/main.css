@@ -51,8 +51,13 @@ textarea {
     white-space: pre;
 }
 
-.side_top {
+.side_top,
+.side_left,
+.side_right {
     position: relative;
+}
+
+.side_top {
     height: 26vh;
 }
 
@@ -61,15 +66,10 @@ textarea {
 }
 
 .side_right {
+    top: -54vh;
+    left: calc(50vw - 50vh);
     height: 54vh;
     width: 135vh;
-}
-
-.side_left,
-.side_right {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
 }
 
 .text_pass {
@@ -145,6 +145,7 @@ textarea {
 
 #links a {
     display: block;
+    height: 4vh;
     width: 13vh;
     color: #444444;
 
@@ -153,7 +154,7 @@ textarea {
 }
 
 #links a:hover {
-    text-decoration: underline;
+    text-shadow: 0 0 .4vh rgba(0, 0, 0, .8);
 }
 
 #settings_panel input[type="checkbox"],
