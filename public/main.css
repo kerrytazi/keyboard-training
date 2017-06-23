@@ -133,6 +133,29 @@ textarea {
     height: 4vh;
 }
 
+#links {
+    left: calc(50vw - 85vh);
+    margin-top: 2vh;
+    height: 9vh;
+    width: 35vh;
+    background: #EEEEEE;
+
+    font-size: 4vh;
+}
+
+#links a {
+    display: block;
+    width: 13vh;
+    color: #444444;
+
+    text-decoration: none;
+    text-align: center;
+}
+
+#links a:hover {
+    text-decoration: underline;
+}
+
 #settings_panel input[type="checkbox"],
 #settings_panel input[type="radio"] {
     height: 2.5vh;

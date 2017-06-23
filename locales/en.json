@@ -17,5 +17,6 @@
     "timer": "Timer",
     "random": "Shake texts",
     "interface": "Language",
-    "texts": "Texts"
+    "texts": "Texts",
+    "author": "Author"
 }
