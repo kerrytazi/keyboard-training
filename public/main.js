@@ -7,6 +7,7 @@ const REGEX_SENTENSE = /[^\s].+?[.!?\s]+(?=\s)/g;
 const REGEX_ENDLINE = /\s*\n\s+/g;
 const REGEX_INVISIBLE_CHARS = /[\t\n\s]+/g;
 const REGEX_QUOTES = /«|»/g;
+const REGEX_HYPHEN = /—/g;
 
 const STATS = {
     time: 0,
@@ -202,7 +203,7 @@ window.app = new Vue({
             this.text = t
                 .replace(REGEX_INVISIBLE_CHARS, ' ')
                 .replace(REGEX_QUOTES, '"')
-                .replace('—', '-');
+                .replace(REGEX_HYPHEN, '-');
         },
 
         'settings.locale.faceLang': function(val) {
