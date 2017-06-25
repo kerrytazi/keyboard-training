@@ -133,7 +133,7 @@ textarea {
 }
 
 #settings_panel > div {
-    height: 4vh;
+    height: 3.7vh;
 }
 
 #links {
@@ -232,7 +232,11 @@ textarea {
 
 .otaku_menu label,
 .otaku_imports {
-    font-size: 2vh;
+    font-size: 1.5vw;
+}
+
+.otaku_menu > div {
+    margin-top: .3vw;
 }
 
 .otaku_menu_open {
@@ -367,7 +371,7 @@ textarea {
 }
 
 #settings_panel > div {
-    height: 2.25vw;
+    height: 2.08125vw;
 }
 
 #links {
