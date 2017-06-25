@@ -18,5 +18,6 @@
     "random": "Перемешать текст",
     "interface": "Язык",
     "texts": "Тексты",
-    "author": "Автор"
+    "author": "Автор",
+    "otakuEnabled": "Включить фон"
 }

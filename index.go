@@ -14,10 +14,12 @@ import (
 )
 
 
-var CURRENT string;
-var FILES = make(map[string]string);
-var TEXTS = make(map[string]int);
-var PORT = os.Getenv("PORT");
+var (
+    CURRENT string;
+    FILES = make(map[string]string);
+    TEXTS = make(map[string]int);
+    PORT = os.Getenv("PORT");
+)
 
 
 func init() {
@@ -47,6 +49,35 @@ func init() {
 }
 
 
+func main() {
+    http.HandleFunc("/", handleSpecialPath);
+    http.HandleFunc("/texts/", handleRawPath);
+    http.HandleFunc("/locales/", handleRawPath);
+    http.HandleFunc("/images/", handleRawPath);
+    http.HandleFunc("/random_text/", handleRedirectTexts);
+    log.Fatal(http.ListenAndServe(":" + PORT, nil));
+}
+
+
+func handleSpecialPath(res http.ResponseWriter, req *http.Request) {
+    path := req.URL.Path;
+    if _, ok := FILES[path]; !ok { return; }
+    http.ServeFile(res, req, FILES[path]);
+}
+
+
+func handleRawPath(res http.ResponseWriter, req *http.Request) {
+    path := filepath.Join(CURRENT, req.URL.Path);
+    http.ServeFile(res, req, path);
+}
+
+
+func handleRedirectTexts(res http.ResponseWriter, req *http.Request) {
+    link := getRandomTextFile(getLocale(req.URL.RawQuery));
+    http.Redirect(res, req, link, 302);
+}
+
+
 func getLocale(rawQuery string) string {
     urlQueryMap, err := url.ParseQuery(rawQuery);
     if err != nil {
@@ -65,32 +96,4 @@ func getRandomTextFile(locale string) string {
     textsLen := TEXTS[locale];
     ind := strconv.Itoa(rand.Intn(textsLen));
     return "/texts/" + locale + "/" + ind;
-}
-
-
-func handleRedirect(res http.ResponseWriter, req *http.Request) {
-    link := getRandomTextFile(getLocale(req.URL.RawQuery));
-    http.Redirect(res, req, link, 302);
-}
-
-
-func handleRawPath(res http.ResponseWriter, req *http.Request) {
-    path := filepath.Join(CURRENT, req.URL.Path);
-    http.ServeFile(res, req, path);
-}
-
-
-func handleSpecialPath(res http.ResponseWriter, req *http.Request) {
-    path := req.URL.Path;
-    if _, ok := FILES[path]; !ok { return; }
-    http.ServeFile(res, req, FILES[path]);
-}
-
-
-func main() {
-    http.HandleFunc("/", handleSpecialPath);
-    http.HandleFunc("/texts/", handleRawPath);
-    http.HandleFunc("/locales/", handleRawPath);
-    http.HandleFunc("/random_text/", handleRedirect);
-    log.Fatal(http.ListenAndServe(":" + PORT, nil));
 }

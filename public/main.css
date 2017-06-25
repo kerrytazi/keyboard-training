@@ -1,7 +1,7 @@
 body {
-    background: #4a4a4a;
     padding: 0;
     margin: 0;
+    background: #4a4a4a;
     font-family: sans-serif, Georgia, Arial;
     overflow: hidden;
 }
@@ -15,6 +15,9 @@ textarea {
 
 #vue_container {
     position: relative;
+    background-size: cover;
+    background-position-x: right;
+
     font-size: 0;
 }
 
@@ -197,12 +200,82 @@ textarea {
     to { background: hsl( 30, 80%, 80%); }
 }
 
+/*otaku*/
+
+.otaku_line {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    height: 100vh;
+    width: 1px;
+}
+
+.content_main {
+    transition: transform .5s linear;
+}
+
+.otaku_mode {
+    transform: translate(-15vw) scale(.7);
+}
+
+.otaku_menu {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    height: 100vh;
+    width: 0;
+    background: #ccc;
+    transition: width .2s linear;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.otaku_menu label {
+    font-size: 2vh;
+}
+
+.otaku_menu_open {
+    width: 18vw;
+    padding: 0 1.5vw 0 .5vw;
+}
+
+.bg_images_list > div {
+    width: 18vw;
+    height: 10.125vw;
+    background-size: cover;
+    background-position-x: right;
+}
+
+.add_new_bg {
+    position: absolute;
+    z-index: 3;
+    background: #ccc;
+    height: 8vh;
+    width: 62vh;
+    left: calc(50vw - 20vh);
+    bottom: 0;
+}
+
+.add_new_bg > input[type="text"] {
+    position: absolute;
+    top: 1vh;
+    left: 1vh;
+    height: 6vh;
+    width: 60vh;
+    border: 0;
+    padding: 0;
+
+    font-size: 4vh;
+    line-height: 6vh;
+}
+
+
 
 /**********************************
     (width * 16) < (height * 9)
 **********************************/
 
-@media only screen and (max-width: 177.77777vh) {
+@media (max-width: 177.77777vh) {
 
 .cont_block {
     box-shadow: 0 0 .5625vw rgba(0, 0, 0, .8);
@@ -318,4 +391,4 @@ textarea {
     font-size: 1.6875vw;
 }
 
-}
+}/*end media*/

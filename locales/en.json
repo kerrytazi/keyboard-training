@@ -18,5 +18,6 @@
     "random": "Shake texts",
     "interface": "Language",
     "texts": "Texts",
-    "author": "Author"
+    "author": "Author",
+    "otakuEnabled": "Enable background"
 }

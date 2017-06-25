@@ -19,6 +19,17 @@ const STATS = {
     nErrors: 0
 }
 
+const ANIME_BG_LIST = [
+    '/images/anime_bg1.jpg',
+    '/images/anime_bg2.jpg',
+    '/images/anime_bg3.jpg',
+    '/images/anime_bg4.png',
+    '/images/anime_bg5.png',
+    '/images/anime_bg6.jpg',
+]
+
+
+
 
 
 
@@ -61,7 +72,15 @@ window.app = new Vue({
         updateInterval: 0,
 
         settingsMode: false,
-        editMode: false
+        editMode: false,
+
+        otaku: {
+            enabled: (localStorage.otaku === 'true'),
+            image: localStorage.otakuImage || '/images/anime_bg3.jpg',
+            menu: false,
+            customMode: false,
+            list: ANIME_BG_LIST
+        }
     },
 
     methods: {
@@ -70,7 +89,8 @@ window.app = new Vue({
                 (event.key.length > 1 && event.keyCode !== 8) ||
                 (!this.text) ||
                 (this.editMode) ||
-                (this.settingsMode)
+                (this.settingsMode) ||
+                (this.otaku.customMode)
             ) return;
 
             if (this.stage === 0) this.start();
@@ -198,12 +218,20 @@ window.app = new Vue({
     },
 
     watch: {
-        textSource(t) {
+        textSource(val) {
             this.reset();
-            this.text = t
+            this.text = val
                 .replace(REGEX_INVISIBLE_CHARS, ' ')
                 .replace(REGEX_QUOTES, '"')
                 .replace(REGEX_HYPHEN, '-');
+        },
+
+        'otaku.enabled': function(val) {
+            localStorage.otaku = val;
+        },
+
+        'otaku.image': function(val) {
+            localStorage.otakuImage = val;
         },
 
         'settings.locale.faceLang': function(val) {
@@ -231,6 +259,8 @@ window.app = new Vue({
         window.addEventListener('keydown', this.onKeyDown);
     }
 });
+
+
 
 
 })();
