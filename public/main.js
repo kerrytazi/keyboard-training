@@ -19,16 +19,21 @@ const STATS = {
     nErrors: 0
 }
 
-const ANIME_BG_LIST = [
+const ANIME_BG_LIST = [/*
     '/images/anime_bg1.jpg',
     '/images/anime_bg2.jpg',
     '/images/anime_bg3.jpg',
     '/images/anime_bg4.png',
     '/images/anime_bg5.png',
-    '/images/anime_bg6.jpg',
+    '/images/anime_bg6.jpg'*/
 ]
 
 
+
+function localStorageLinks() {
+    if (!localStorage.otakuList) return [];
+    return localStorage.otakuList.split(',');
+}
 
 
 
@@ -37,7 +42,6 @@ window.app = new Vue({
     el: '#vue_container',
 
     data: {
-
         stats: Object.assign({}, STATS),
         localeFace: {},
 
@@ -76,10 +80,10 @@ window.app = new Vue({
 
         otaku: {
             enabled: (localStorage.otaku === 'true'),
-            image: localStorage.otakuImage || '/images/anime_bg3.jpg',
+            image: localStorage.otakuImage || '/images/otaku/anime_bg3.jpg',
             menu: false,
             customMode: false,
-            list: ANIME_BG_LIST
+            list: localStorageLinks()
         }
     },
 
@@ -199,6 +203,30 @@ window.app = new Vue({
             let locale = this.settings.locale.faceLang;
             let res = await fetch(`/locales/${locale}.json`);
             this.localeFace = await res.json();
+        },
+
+        async importLinks() {
+            let res = await fetch(`/importLinks/`);
+            let text = await res.text();
+
+            text.split(',').forEach(link => {
+                if (!this.otaku.list.includes(link)) {
+                    this.otaku.list.push(link);
+                }
+            });
+
+            localStorage.otakuList = this.otaku.list;
+        },
+
+        addToOtakuList() {
+            this.otaku.image = this.otaku.customLink;
+            this.otaku.list.push(this.otaku.customLink);
+            localStorage.otakuList = this.otaku.list;
+        },
+
+        delFromOtakuList(link, ind) {
+            this.otaku.list.splice(ind, 1);
+            localStorage.otakuList = this.otaku.list;
         }
     },
 

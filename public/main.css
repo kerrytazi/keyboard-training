@@ -230,7 +230,8 @@ textarea {
     overflow-x: hidden;
 }
 
-.otaku_menu label {
+.otaku_menu label,
+.otaku_imports {
     font-size: 2vh;
 }
 
@@ -240,6 +241,7 @@ textarea {
 }
 
 .bg_images_list > div {
+    position: relative;
     width: 18vw;
     height: 10.125vw;
     background-size: cover;
@@ -267,6 +269,23 @@ textarea {
 
     font-size: 4vh;
     line-height: 6vh;
+}
+
+.add_plus_panel {
+    background-image: url(/images/add_plus.svg);
+    background-size: cover;
+    background-position-x: right;
+}
+
+.del_from_otaku_list_btn {
+    position: absolute;
+    height: 1.5vw;
+    width: 1.5vw;
+    top: 0;
+    left: 0;
+    background-image: url(/images/del_btn.svg);
+    background-size: cover;
+    cursor: pointer;
 }
 
 

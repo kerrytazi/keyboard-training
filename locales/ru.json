@@ -19,5 +19,6 @@
     "interface": "Язык",
     "texts": "Тексты",
     "author": "Автор",
-    "otakuEnabled": "Включить фон"
+    "otakuEnabled": "Включить фон",
+    "importLinks": "Загрузить стандартные фоны"
 }

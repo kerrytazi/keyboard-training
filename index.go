@@ -5,6 +5,7 @@ import (
     "log"
     "os"
     "strconv"
+    "strings"
     "time"
     "math/rand"
     "io/ioutil"
@@ -16,6 +17,7 @@ import (
 
 var (
     CURRENT string;
+    OTAKU_LINKS []byte
     FILES = make(map[string]string);
     TEXTS = make(map[string]int);
     PORT = os.Getenv("PORT");
@@ -45,6 +47,14 @@ func init() {
         TEXTS[name] = len(t);
     }
 
+    links, _ := ioutil.ReadDir(filepath.Join(CURRENT, "images", "otaku"));
+    var linkList []string;
+    for _, link := range links {
+        linkList = append(linkList, "/images/otaku/" + link.Name());
+    }
+
+    OTAKU_LINKS = []byte(strings.Join(linkList, ","));
+
     rand.Seed(time.Now().UTC().UnixNano());
 }
 
@@ -54,6 +64,7 @@ func main() {
     http.HandleFunc("/texts/", handleRawPath);
     http.HandleFunc("/locales/", handleRawPath);
     http.HandleFunc("/images/", handleRawPath);
+    http.HandleFunc("/importLinks/", handleImportLinks);
     http.HandleFunc("/random_text/", handleRedirectTexts);
     log.Fatal(http.ListenAndServe(":" + PORT, nil));
 }
@@ -69,6 +80,11 @@ func handleSpecialPath(res http.ResponseWriter, req *http.Request) {
 func handleRawPath(res http.ResponseWriter, req *http.Request) {
     path := filepath.Join(CURRENT, req.URL.Path);
     http.ServeFile(res, req, path);
+}
+
+
+func handleImportLinks(res http.ResponseWriter, req *http.Request) {
+    res.Write(OTAKU_LINKS);
 }
 
 

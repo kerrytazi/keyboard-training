@@ -26,14 +26,26 @@
                     for="otaku_enabled"
                     v-text="localeFace.otakuEnabled"></label>
             </div>
+            <div>
+                <input
+                    class="otaku_imports"
+                    type="button"
+                    @click="importLinks"
+                    :value="localeFace.importLinks">
+            </div>
             <div class="bg_images_list">
                 <div
-                    v-for="img in otaku.list"
-                    @click="otaku.image = img"
-                    :style="{'background-image': `url(${img})`}"></div>
+                    v-for="(link, ind) in otaku.list"
+                    @click.self="otaku.image = link"
+                    :style="{'background-image': `url(${link})`}"
+                    >
+                        <div
+                            @click="delFromOtakuList(link, ind)"
+                            class="del_from_otaku_list_btn"></div>
+                    </div>
                 <div
                     @click="otaku.customMode = true"
-                    :style="{'background-image': `url(/images/add_plus.svg)`}"></div>
+                    class="add_plus_panel"></div>
             </div>
         </div>
         <div
@@ -46,8 +58,10 @@
         >
             <input
                 type="text"
-                @keyup.enter="otaku.image = otaku.customLink"
+                autofocus
+                @keyup.enter="addToOtakuList"
                 @keyup.esc="otaku.customMode = false, otaku.customLink = ''"
+                @blur="otaku.customMode = false, otaku.customLink = ''"
                 v-model="otaku.customLink">
         </div>
         <div

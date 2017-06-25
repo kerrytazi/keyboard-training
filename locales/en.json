@@ -19,5 +19,6 @@
     "interface": "Language",
     "texts": "Texts",
     "author": "Author",
-    "otakuEnabled": "Enable background"
+    "otakuEnabled": "Enable background",
+    "importLinks": "Load standart images"
 }
