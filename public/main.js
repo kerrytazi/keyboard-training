@@ -19,16 +19,6 @@ const STATS = {
     nErrors: 0
 }
 
-const ANIME_BG_LIST = [/*
-    '/images/anime_bg1.jpg',
-    '/images/anime_bg2.jpg',
-    '/images/anime_bg3.jpg',
-    '/images/anime_bg4.png',
-    '/images/anime_bg5.png',
-    '/images/anime_bg6.jpg'*/
-]
-
-
 
 function localStorageLinks() {
     if (!localStorage.otakuList) return [];
@@ -75,9 +65,6 @@ window.app = new Vue({
         startTime: 0,
         updateInterval: 0,
 
-        settingsMode: false,
-        editMode: false,
-
         otaku: {
             enabled: (localStorage.otaku === 'true'),
             image: localStorage.otakuImage || '/images/otaku/anime_bg3.jpg',
@@ -91,10 +78,7 @@ window.app = new Vue({
         onKeyDown(event) {
             if ((this.stage === 2) ||
                 (event.key.length > 1 && event.keyCode !== 8) ||
-                (!this.text) ||
-                (this.editMode) ||
-                (this.settingsMode) ||
-                (this.otaku.customMode)
+                (event.target !== document.body)
             ) return;
 
             if (this.stage === 0) this.start();

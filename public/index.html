@@ -119,9 +119,7 @@
                             type="number"
                             min="1"
                             :disabled="!settings.timer.enabled"
-                            v-model="settings.timer.time"
-                            @focus="settingsMode = true, stop()"
-                            @blur="settingsMode = false, reset()">
+                            v-model="settings.timer.time">
                     </div>
                     <div>
                         <label
@@ -194,8 +192,6 @@
                 </div>
                 <textarea
                     class="text_inp cont_block"
-                    @focus="editMode = true"
-                    @blur="editMode = false"
                     v-model="textSource"></textarea>
             </div>
         </div>
