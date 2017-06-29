@@ -13,6 +13,10 @@
         class="full_screen"
         :style="otaku.enabled ? {'background-image': `url(${otaku.image})`} : {}"
     >
+        <input
+            id="main_input"
+            type="text"
+            ref="mainInput">
         <div
             class="otaku_menu"
             :class="otaku.menu ? 'otaku_menu_open' : ''"
@@ -61,7 +65,7 @@
                 autofocus
                 @keyup.enter="addToOtakuList"
                 @keyup.esc="otaku.customMode = false, otaku.customLink = ''"
-                @blur="otaku.customMode = false, otaku.customLink = ''"
+                @blur="otaku.customMode = false, otaku.customLink = '', mainInput.focus()"
                 v-model="otaku.customLink">
         </div>
         <div

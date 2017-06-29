@@ -21,6 +21,11 @@ textarea {
     font-size: 0;
 }
 
+#main_input {
+    position: absolute;
+    opacity: 0;
+}
+
 .cont_block {
     position: relative;
     box-shadow: 0 0 1vh rgba(0, 0, 0, .8);
