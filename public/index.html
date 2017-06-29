@@ -13,10 +13,6 @@
         class="full_screen"
         :style="otaku.enabled ? {'background-image': `url(${otaku.image})`} : {}"
     >
-        <input
-            id="main_input"
-            type="text"
-            ref="mainInput">
         <div
             class="otaku_menu"
             :class="otaku.menu ? 'otaku_menu_open' : ''"
@@ -65,7 +61,7 @@
                 autofocus
                 @keyup.enter="addToOtakuList"
                 @keyup.esc="otaku.customMode = false, otaku.customLink = ''"
-                @blur="otaku.customMode = false, otaku.customLink = '', mainInput.focus()"
+                @blur="otaku.customMode = false, otaku.customLink = ''"
                 v-model="otaku.customLink">
         </div>
         <div
@@ -107,6 +103,7 @@
                         <input
                             id="sett_stamina"
                             type="checkbox"
+                            @focus="$event.target.blur()"
                             v-model="settings.stamina">
                     </div>
                     <div>
@@ -116,6 +113,7 @@
                         <input
                             id="sett_timer"
                             type="checkbox"
+                            @focus="$event.target.blur()"
                             v-model="settings.timer.enabled">
                     </div>
                     <div>
@@ -132,6 +130,7 @@
                         <input
                             id="sett_rand"
                             type="checkbox"
+                            @focus="$event.target.blur()"
                             v-model="settings.randomText">
                     </div>
                     <div>
@@ -141,7 +140,8 @@
                                 type="radio"
                                 :id="`sett_loc_texts_${loc}`"
                                 :value="loc"
-                                v-model="settings.locale.textsLang">
+                                v-model="settings.locale.textsLang"
+                                @focus="$event.target.blur()">
                             <label
                                 :for="`sett_loc_texts_${loc}`"
                                 v-text="loc"></label>
@@ -154,7 +154,8 @@
                                 type="radio"
                                 :id="`sett_loc_face_${loc}`"
                                 :value="loc"
-                                v-model="settings.locale.faceLang">
+                                v-model="settings.locale.faceLang"
+                                @focus="$event.target.blur()">
                             <label
                                 :for="`sett_loc_face_${loc}`"
                                 v-text="loc"></label>

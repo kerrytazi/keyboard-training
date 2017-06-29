@@ -7,7 +7,9 @@ const REGEX_SENTENSE = /[^\s].+?[.!?\s]+(?=\s)/g;
 const REGEX_ENDLINE = /\s*\n\s+/g;
 const REGEX_INVISIBLE_CHARS = /[\t\n\s]+/g;
 const REGEX_QUOTES = /«|»/g;
-const REGEX_HYPHEN = /—/g;
+const REGEX_HYPHEN = /—|–/g;
+
+const DEFAULT_IMAGE_PATH = '/images/otaku/anime_bg3.jpg';
 
 const STATS = {
     time: 0,
@@ -67,7 +69,7 @@ window.app = new Vue({
 
         otaku: {
             enabled: (localStorage.otaku === 'true'),
-            image: localStorage.otakuImage || '/images/otaku/anime_bg3.jpg',
+            image: localStorage.otakuImage || DEFAULT_IMAGE_PATH,
             menu: false,
             customMode: false,
             list: localStorageLinks()
@@ -75,19 +77,10 @@ window.app = new Vue({
     },
 
     methods: {
-        onClick(event) {
-            let { target } = event;
-            if (target.type !== 'number' &&
-                target.type !== 'text' &&
-                target.type !== 'textarea'
-            ) {
-                this.$refs.mainInput.focus();
-            }
-        },
-
         onKeyDown(event) {
             if ((this.stage === 2) ||
-                (event.key.length > 1 && event.keyCode !== 8)
+                (event.key.length > 1 && event.keyCode !== 8) ||
+                (event.target !== document.body)
             ) return;
 
             if (this.stage === 0) this.start();
@@ -110,7 +103,7 @@ window.app = new Vue({
             }
 
             this.stats.total++;
-            this.updateStats();
+            this.updateStats(event.timeStamp);
         },
 
         erease() {
@@ -129,8 +122,7 @@ window.app = new Vue({
             }
         },
 
-        updateStats() {
-            let now = performance.now();
+        updateStats(now=performance.now()) {
             let { stats, startTime, updateTaps } = this;
             
             updateTaps(now);
@@ -278,9 +270,7 @@ window.app = new Vue({
         this.newLocale();
         this.newText();
 
-        window.addEventListener('click', this.onClick);
-        this.$refs.mainInput.addEventListener('keydown', this.onKeyDown);
-        this.$refs.mainInput.focus();
+        window.addEventListener('keydown', this.onKeyDown);
     }
 });
 
