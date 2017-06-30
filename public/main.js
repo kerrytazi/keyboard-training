@@ -103,7 +103,7 @@ window.app = new Vue({
             }
 
             this.stats.total++;
-            this.updateStats(event.timeStamp);
+            this.updateStats(performance.now());
         },
 
         erease() {
